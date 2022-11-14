@@ -84,6 +84,16 @@ public class WatorModel {
 				maze[i][j] = WATER;
 	}
 
+	public void createSimulation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void step() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 

@@ -124,6 +124,11 @@ public class WatorView extends Application {
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
+
+	public void redraw() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

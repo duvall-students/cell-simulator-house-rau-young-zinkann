@@ -5,14 +5,18 @@ import java.awt.Point;
 import model.WatorModel;
 import view.WatorView;
 
+/*
+ *  wzinkann
+ */
+
 public class WatorController {
 
-	private Model model;
-	private SimulationDisplay simulationDisplay;
+	private WatorModel model;
+	private WatorView simulationDisplay;
 
-	public WatorController(int width, int height, SimulationDisplay simulationDisplay) {	
+	public WatorController(int width, int height, WatorView simulationDisplay) {	
 			this.simulationDisplay=  simulationDisplay;
-			this.model = new Model(width,height);
+			this.model = new WatorModel(width,height);
 		}
 	
 	public void newSimulation() {
