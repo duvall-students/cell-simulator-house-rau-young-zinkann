@@ -5,6 +5,8 @@ import java.awt.Point;
 public class Model {
 	// Possible states of squares that make up a maze
 		public static final int WATER = 2;		// Basic hall space
+		public static final int FISH = 2;		
+
 
 		private int[][] maze;	// The squares making up the maze
 
