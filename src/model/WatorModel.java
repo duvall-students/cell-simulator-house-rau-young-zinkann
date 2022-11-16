@@ -4,8 +4,13 @@ import java.awt.Point;
 
 public class WatorModel {
 	// Possible states of squares that make up a maze
-			public static final int WATER = 2;		// Basic hall space
+			public static final int WATER = 1;		// Basic hall space
 			public static final int FISH = 2;		
+			public static final int SHARK = 3;
+			public static final double WATER_DENSITY = .2;
+			public static final double FISH_DENSITY = .7;
+			public static final double SHARK_DENSITY = .1;
+
 
 
 			private int[][] maze;	// The squares making up the maze
@@ -69,21 +74,23 @@ public class WatorModel {
 			public void createMaze(int rows, int cols) {
 				assert(rows > 0 && cols > 0);
 				maze = new int[rows][cols];
-				// Create a random maze.  The strategy is to start with
-				// a grid of disconnected "rooms" separated by walls,
-				// then look at each of the separating walls, in a random
-				// order.  If tearing down a wall would not create a loop
-				// in the maze, then tear it down.  Otherwise, leave it in place.
 				int i,j;
-				int emptyCt = 0; // number of rooms
-				int wallCt = 0;  // number of walls
-				int[] wallrow = new int[(rows*cols)/2];  // position of walls between rooms
-				int[] wallcol = new int[(rows*cols)/2];
-				for (i = 0; i<rows; i++)  // start with everything being a wall
+				for (i = 0; i<rows; i++)
 					for (j = 0; j < cols; j++)
-						maze[i][j] = WATER;
+						maze[i][j] = TileRandomizer(i,j);
 			}
-
+			
+			public int TileRandomizer (int row, int col) {
+				int r = (int) Math.random();
+				if(r >= WATER_DENSITY + SHARK_DENSITY) {
+					return FISH;
+				} else if (SHARK_DENSITY <  r && r < WATER_DENSITY + SHARK_DENSITY) {
+					return WATER;
+				}
+				
+				return SHARK;
+				
+			}
 
 		
 
