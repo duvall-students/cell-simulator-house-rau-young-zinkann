@@ -4,7 +4,7 @@ import java.awt.Point;
 
 public class WatorModel {
 	// Possible states of squares that make up a maze
-			public static final int WATER = 1;		// Basic hall space
+			public static final int WATER = 1;	
 			public static final int FISH = 2;		
 			public static final int SHARK = 3;
 			public static final double WATER_DENSITY = .2;
@@ -54,23 +54,7 @@ public class WatorModel {
 				return maze[square.x][square.y];
 			}
 
-
-
-			
-			/* 
-			 * 
-			 * 
-			 * 
-			 * Remaining code is from "Introduction to Programming Using Java" by Eck.
-			 *
-			 *
-			 *
-			 */
-			/*
-			 * Create a new random maze of the given dimensions and store the result.
-			 * Maze has no cycles.
-			 */
-
+			//Ben: creates a maze
 			public void createMaze(int rows, int cols) {
 				assert(rows > 0 && cols > 0);
 				maze = new int[rows][cols];
@@ -80,6 +64,8 @@ public class WatorModel {
 						maze[i][j] = TileRandomizer(i,j);
 			}
 			
+			
+			//Ben: Randomizes the Tile Value Based on Densities
 			public int TileRandomizer (int row, int col) {
 				int r = (int) Math.random();
 				if(r >= WATER_DENSITY + SHARK_DENSITY) {
