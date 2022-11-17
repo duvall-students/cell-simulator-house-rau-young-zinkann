@@ -3,6 +3,7 @@ package model;
 public class Shark extends WatorCreature {
 	
 	private int myStarveTime;
+	private int originalStarveTime = myStarveTime;;
 
 	public Shark(int tag, int row, int col, WatorObject[][] watorWorld) {
 		super(tag, row, col, watorWorld);
@@ -12,6 +13,7 @@ public class Shark extends WatorCreature {
 	
 	public void setStarveTime(int starveTime) {
 		myStarveTime = starveTime;
+		originalStarveTime = myStarveTime;
 	}
 	
 	
@@ -27,5 +29,9 @@ public class Shark extends WatorCreature {
 		else {
 			return false;
 		}
+	}
+	
+	public void eat() {
+		myStarveTime = originalStarveTime;
 	}
 }

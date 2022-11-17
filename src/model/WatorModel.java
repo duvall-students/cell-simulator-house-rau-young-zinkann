@@ -130,6 +130,26 @@ public class WatorModel {
 		}
 		return new Shark(SHARK_TAG, row, col, myWatorModel);		
 	}
+	
+	private boolean isValidPoint(Point currentLocation) {
+		return true;
+	}
+	
+	
+	public void update() {
+		//loop through each object
+		for(int i = 0; i < myWatorModel.length; i++) {
+			for(int j = 0; j < myWatorModel[i].length; j++) {
+				//check is fish 
+				if(myWatorModel[i][j].getTag() == 1) {
+					//swim behavior
+					
+					
+					
+				}
+			}
+		}
+	}
 
 
 
