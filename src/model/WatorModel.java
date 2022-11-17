@@ -77,7 +77,7 @@ public class WatorModel {
 	 * Maze has no cycles.
 	 */
 	
-	
+	/*
 	private Collection<Point> getNeighbors(){
 		List<Point> maybeNeighbors = new ArrayList<>();
 		maybeNeighbors.add(new Point(current.x-1,current.y));
@@ -106,7 +106,8 @@ public class WatorModel {
 	public WatorObject[][] getModel() {
 		return myWatorModel;
 	}
-
+	*/
+	
 	public void createWatorWorld(int rows, int cols) {
 		assert(rows > 0 && cols > 0);
 		myWatorModel = new WatorObject[rows][cols];
@@ -123,13 +124,11 @@ public class WatorModel {
 		//get random double through our range 
 		double r = Math.random() * (max -min) - min;
 		if(r >= waterDensity + sharkDensity) {
-			return new Fish(FISH_TAG,row, col);
+			return new Fish(FISH_TAG,row, col, myWatorModel);
 		} else if (sharkDensity <  r && r < waterDensity + sharkDensity) {
-			return new Water(WATER_TAG, row, col);
+			return new Water(WATER_TAG, row, col, myWatorModel);
 		}
-		
-		return new Shark(SHARK_TAG, row, col);
-		
+		return new Shark(SHARK_TAG, row, col, myWatorModel);		
 	}
 
 

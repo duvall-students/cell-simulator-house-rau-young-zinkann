@@ -19,11 +19,13 @@ public class Shark extends WatorCreature {
 		myStarveTime -=1;
 	}
 
-	public void starve() {
+	public boolean starve() {
 		if(myStarveTime == 0) {
 			//died replaced with water cell
-			super.myWatorModel.getModel()[super.location.x][super.location.y] = new Water(super.location.x,super.location.y)
-			
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }
