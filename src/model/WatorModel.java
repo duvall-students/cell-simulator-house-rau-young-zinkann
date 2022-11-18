@@ -142,11 +142,29 @@ public class WatorModel {
 			for(int j = 0; j < myWatorModel[i].length; j++) {
 				//check is fish 
 				if(myWatorModel[i][j].getTag() == 1) {
+					Fish current = (Fish)myWatorModel[i][j];
+					//reduce breed time for the cycle 
+					current.reduceBreedTime();
+					
 					//swim behavior
 					
 					
-					
+					if(current.isBreeding()) {
+						//breed behavior
+					}
 				}
+				//check shark
+				if(myWatorModel[i][j].getTag() == 2) {
+						Shark current = (Shark)myWatorModel[i][j];
+						current.reduceBreedTime();
+						current.reduceStarveTime();
+						
+						
+						if(current.isBreeding()) {
+							//shark breed behavior
+						}
+					}
+				
 			}
 		}
 	}

@@ -21,6 +21,9 @@ public class WatorCreature extends WatorObject{
 	public void SetBreedTime(int breedTime) {
 		myBreedTime = breedTime;
 	}
+	public void reduceBreedTime() {
+		myBreedTime -= 1;
+	}
 	
 	public boolean isBreeding() {
 		if(myBreedTime <= 0) {

@@ -17,7 +17,7 @@ public class Shark extends WatorCreature {
 	}
 	
 	
-	public void reduceTime() {
+	public void reduceStarveTime() {
 		myStarveTime -=1;
 	}
 
