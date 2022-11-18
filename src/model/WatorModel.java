@@ -131,8 +131,15 @@ public class WatorModel {
 		return new Shark(SHARK_TAG, row, col, myWatorModel);		
 	}
 	
-	private boolean isValidPoint(Point currentLocation) {
-		return true;
+	
+	//return array of valid points either empty or food in the case of sharks
+	private ArrayList<Point> getValidPointArray(Point currentLocation, int searchTag) {
+		ArrayList<Point> validPoints = new ArrayList<Point>();
+		//need to get x-1 and x+1
+		
+		//need to get y-1 and y=1
+		
+		return validPoints;
 	}
 	
 	
