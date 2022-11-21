@@ -156,7 +156,7 @@ public class WatorModel {
 				}
 			
 		}
-		
+		//check y+1
 		if(currentLocation.y + 1 != myWatorModel[0].length) {
 			if(myWatorModel[currentLocation.x][currentLocation.y + 1].getTag() == targetTag) {
 				validPoints.add(new Point(currentLocation.x, currentLocation.y + 1));
@@ -186,15 +186,24 @@ public class WatorModel {
 						int randomNum = (int) Math.random() * (swimAreas.size() - 1);
 						Point swimPoint = swimAreas.get(randomNum);
 						Point previousPoint = current.getLocation();
+						
+						
 						myWatorModel[swimPoint.x][swimPoint.y] = current;
+						myWatorModel[swimPoint.x][swimPoint.y].setLocation(swimPoint);
+						
 						myWatorModel[previousPoint.x][previousPoint.y] = new Water(WATER_TAG, previousPoint.x, previousPoint.y, myWatorModel);
-					}
-					//current point becomes next point other point becomes water
-					
+					}	
 					
 					
 					if(current.isBreeding()) {
-						//breed behavior
+						//breed behavior *refactor 
+						ArrayList<Point> breedAreas = getValidPointArray(current, WATER_TAG);
+						if(!breedAreas.isEmpty()) {
+							int randomNum = (int) Math.random() * (swimAreas.size() - 1);
+							Point breedPoint = breedAreas.get(randomNum);
+							
+							myWatorModel[breedPoint.x][breedPoint.y] = new Fish(FISH_TAG, breedPoint.x, breedPoint.y, myWatorModel);
+						}
 					}
 				}
 				//check shark

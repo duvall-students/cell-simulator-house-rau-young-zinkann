@@ -23,4 +23,8 @@ public class WatorObject {
 	public Point getLocation() {
 		return location;
 	}
+	
+	public void setLocation(Point newLocation) {
+		location = newLocation;
+	}
 }
