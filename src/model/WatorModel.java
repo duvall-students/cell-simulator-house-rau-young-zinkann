@@ -144,7 +144,7 @@ public class WatorModel {
 			}
 		}
 		//check for x+1 bounds
-		if(currentLocation.x + 1 <= myWatorModel.length) {
+		if(currentLocation.x + 1 != myWatorModel.length) {
 			if(myWatorModel[currentLocation.x+ 1][currentLocation.y].getTag() == targetTag) {
 			validPoints.add(new Point(currentLocation.x + 1, currentLocation.y ));
 			}
@@ -157,7 +157,7 @@ public class WatorModel {
 			
 		}
 		
-		if(currentLocation.y + 1 <= myWatorModel[0].length) {
+		if(currentLocation.y + 1 != myWatorModel[0].length) {
 			if(myWatorModel[currentLocation.x][currentLocation.y + 1].getTag() == targetTag) {
 				validPoints.add(new Point(currentLocation.x, currentLocation.y + 1));
 				}
@@ -178,13 +178,16 @@ public class WatorModel {
 					Fish current = (Fish)myWatorModel[i][j];
 					//reduce breed time for the cycle 
 					current.reduceBreedTime();
-					
 					//swim behavior
 					//gets array of water spots 
 					ArrayList<Point> swimAreas = getValidPointArray(current, WATER_TAG);
-					
 					if(!swimAreas.isEmpty()) {
-						
+						//swim logic
+						int randomNum = (int) Math.random() * (swimAreas.size() - 1);
+						Point swimPoint = swimAreas.get(randomNum);
+						Point previousPoint = current.getLocation();
+						myWatorModel[swimPoint.x][swimPoint.y] = current;
+						myWatorModel[previousPoint.x][previousPoint.y] = new Water(WATER_TAG, previousPoint.x, previousPoint.y, myWatorModel);
 					}
 					//current point becomes next point other point becomes water
 					
