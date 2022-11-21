@@ -133,9 +133,35 @@ public class WatorModel {
 	
 	
 	//return array of valid points either empty or food in the case of sharks
-	private ArrayList<Point> getValidPointArray(Point currentLocation, int searchTag) {
+	private ArrayList<Point> getValidPointArray(WatorObject currentObject, int targetTag) {
+		Point currentLocation = currentObject.getLocation();		
 		ArrayList<Point> validPoints = new ArrayList<Point>();
 		//need to get x-1 and x+1
+		//check for x -1 bounds 
+		if(currentLocation.x - 1 > 0 ) {
+			if(myWatorModel[currentLocation.x - 1][currentLocation.y].getTag() == targetTag) {
+			validPoints.add(new Point(currentLocation.x -1, currentLocation.y));
+			}
+		}
+		//check for x+1 bounds
+		if(currentLocation.x + 1 <= myWatorModel.length) {
+			if(myWatorModel[currentLocation.x+ 1][currentLocation.y].getTag() == targetTag) {
+			validPoints.add(new Point(currentLocation.x + 1, currentLocation.y ));
+			}
+		}
+		//check for y -1 bounds
+		if(currentLocation.y - 1 > 0) {
+			if(myWatorModel[currentLocation.x][currentLocation.y - 1].getTag() == targetTag) {
+				validPoints.add(new Point(currentLocation.x, currentLocation.y -1));
+				}
+			
+		}
+		
+		if(currentLocation.y + 1 <= myWatorModel[0].length) {
+			if(myWatorModel[currentLocation.x][currentLocation.y + 1].getTag() == targetTag) {
+				validPoints.add(new Point(currentLocation.x, currentLocation.y + 1));
+				}
+		}
 		
 		//need to get y-1 and y=1
 		
@@ -154,6 +180,14 @@ public class WatorModel {
 					current.reduceBreedTime();
 					
 					//swim behavior
+					//gets array of water spots 
+					ArrayList<Point> swimAreas = getValidPointArray(current, WATER_TAG);
+					
+					if(!swimAreas.isEmpty()) {
+						
+					}
+					//current point becomes next point other point becomes water
+					
 					
 					
 					if(current.isBreeding()) {

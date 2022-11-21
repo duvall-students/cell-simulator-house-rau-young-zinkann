@@ -19,4 +19,8 @@ public class WatorObject {
 	public int getTag() {
 		return myTag;
 	}
+	
+	public Point getLocation() {
+		return location;
+	}
 }
