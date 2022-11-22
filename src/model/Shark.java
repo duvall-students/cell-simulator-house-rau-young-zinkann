@@ -21,7 +21,7 @@ public class Shark extends WatorCreature {
 		myStarveTime -=1;
 	}
 
-	public boolean starve() {
+	public boolean isStarved() {
 		if(myStarveTime == 0) {
 			//died replaced with water cell
 			return true;
