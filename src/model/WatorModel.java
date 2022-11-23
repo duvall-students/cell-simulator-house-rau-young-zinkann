@@ -59,54 +59,6 @@ public class WatorModel {
 		assert(validPoint(square));
 		return myWatorModel[square.x][square.y];
 	}
-
-
-
-
-	/* 
-	 * 
-	 * 
-	 * 
-	 * Remaining code is from "Introduction to Programming Using Java" by Eck.
-	 *
-	 *
-	 *
-	 */
-	/*
-	 * Create a new random maze of the given dimensions and store the result.
-	 * Maze has no cycles.
-	 */
-	
-	/*
-	private Collection<Point> getNeighbors(){
-		List<Point> maybeNeighbors = new ArrayList<>();
-		maybeNeighbors.add(new Point(current.x-1,current.y));
-		maybeNeighbors.add(new Point(current.x+1,current.y));
-		maybeNeighbors.add(new Point(current.x,current.y+1));
-		maybeNeighbors.add(new Point(current.x,current.y-1));
-		List<Point> neighbors = new ArrayList<>();
-		for(Point p: maybeNeighbors){
-			if(myWatorModel.inBounds(p)){
-				neighbors.add(p);
-			}
-		}
-		return neighbors;
-	}
-	
-	private Point chooseNeighbor(Collection<Point> neighbors){
-		for(Point p: neighbors){
-			if(myWatorModel.get(p).getTag()== myWatorModel.WATER_TAG){
-				return p;
-			}
-		}
-		return null;
-	}
-	
-	//get 
-	public WatorObject[][] getModel() {
-		return myWatorModel;
-	}
-	*/
 	
 	public void createWatorWorld(int rows, int cols) {
 		assert(rows > 0 && cols > 0);
@@ -116,9 +68,6 @@ public class WatorModel {
 			for (j = 0; j < cols; j++)
 				myWatorModel[i][j] = PopulateObject(i,j);
 	}
-	
-	
-	
 	
 	public WatorObject PopulateObject (int row, int col) {
 		//get random double through our range 
