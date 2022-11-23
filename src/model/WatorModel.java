@@ -254,12 +254,5 @@ public class WatorModel {
 				
 			}
 		}
-	}
-
-
-
-
-
-
-
+  }
 }
