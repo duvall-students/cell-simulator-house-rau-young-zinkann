@@ -7,6 +7,8 @@ import model.WatorModel;
 import model.WatorObject;
 
 import java.awt.Point;
+
+import controller.WatorController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -51,10 +53,14 @@ public class WatorView extends Application {
 	private Rectangle[][] cells;				// the Rectangle objects that will get updated and drawn
 
 	private WatorModel cellModel;
+	private WatorController cellController;
 
 	public void start(Stage stage) {
 		// Initialize the model
 		cellModel = new WatorModel(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS);
+		
+		// Initialize the controller
+		cellController = new WatorController();
 
 		// Initializing the gui
 		myScene = setupScene();
