@@ -136,7 +136,7 @@ public class WatorView extends Application {
 		Group drawing = new Group();
 		cells = new Rectangle[INITIAL_NUM_ROWS][INITIAL_NUM_COLUMNS];
 		// get cells from model
-		Rectangle[][] modelCells = cellModel.getWatorModelView();
+		Rectangle[][] modelCells = cellModel.getWatorModelView(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS);
 
 //		for(int i = 0; i < INITIAL_NUM_ROWS + 1; i++){
 //			

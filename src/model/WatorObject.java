@@ -7,6 +7,8 @@ import javafx.scene.shape.Rectangle;
 
 public class WatorObject {
 	
+	private static final int BLOCK_SIZE = 12;
+	
 	private int myTag;
 	protected Point location;
 	protected WatorObject[][] myWatorWorld;
@@ -18,9 +20,9 @@ public class WatorObject {
 		myTag = tag;
 		location = new Point(row, column);
 		myWatorWorld = watorWorld;
-		myRectangle = new Rectangle();
-		myRectangle.setWidth(12);
-		myRectangle.setHeight(12);
+		myRectangle = new Rectangle(BLOCK_SIZE * column, BLOCK_SIZE * row, BLOCK_SIZE ,BLOCK_SIZE);
+		//myRectangle.setWidth(12);
+		//myRectangle.setHeight(12);
 		
 	}
 	
@@ -44,4 +46,5 @@ public class WatorObject {
 		myRectangle.setX(x);
 		myRectangle.setY(y);
 	}
+	
 }
