@@ -129,18 +129,18 @@ public class WatorModel {
 		for(int i = 0; i < myWatorModel.length; i++) {
 			for(int j = 0; j < myWatorModel[i].length; j++) {
 				//check is fish 
-				if(myWatorModel[i][j].getTag() == 1) {
-					Fish current = (Fish) myWatorModel[i][j];
+				if(myWatorModel[i][j].getTag() == 2) {
+					Fish currentFish = (Fish) myWatorModel[i][j];
 					
 					//reduce breed time for the cycle 
-					current.reduceBreedTime();
+					currentFish.reduceBreedTime();
 					
 					//breed behavior
-					if(current.isBreeding()) {
+					if(currentFish.isBreeding()) {
 						//breed behavior *refactor 
-						ArrayList<Point> breedAreas = getValidPointArray(current, WATER_TAG);
+						ArrayList<Point> breedAreas = getValidPointArray(currentFish, WATER_TAG);
 						if(!breedAreas.isEmpty()) {
-							int randomNum = random.nextInt(breedAreas.size() + 1);
+							int randomNum = random.nextInt((breedAreas.size() - 1) + 1);
 							
 							Point breedPoint = breedAreas.get(randomNum);
 							
@@ -150,15 +150,15 @@ public class WatorModel {
 					
 					//swim behavior
 					//gets array of water spots 
-					ArrayList<Point> swimAreas = getValidPointArray(current, WATER_TAG);
+					ArrayList<Point> swimAreas = getValidPointArray(currentFish, WATER_TAG);
 					if(!swimAreas.isEmpty()) {
 						//swim logic
-						int randomNum = random.nextInt(swimAreas.size() + 1);
+						int randomNum = random.nextInt((swimAreas.size() - 1) + 1);
 						Point swimPoint = swimAreas.get(randomNum);
-						Point previousPoint = current.getLocation();
+						Point previousPoint = currentFish.getLocation();
 						
 						
-						myWatorModel[swimPoint.x][swimPoint.y] = current;
+						myWatorModel[swimPoint.x][swimPoint.y] = currentFish;
 						myWatorModel[swimPoint.x][swimPoint.y].setLocation(swimPoint);
 						
 						myWatorModel[previousPoint.x][previousPoint.y] = new Water(WATER_TAG, previousPoint.x, previousPoint.y, myWatorModel);
@@ -168,7 +168,7 @@ public class WatorModel {
 				
 				}
 				//check shark
-				if(myWatorModel[i][j].getTag() == 2) {
+				if(myWatorModel[i][j].getTag() == 1) {
 					
 						Shark current = (Shark)myWatorModel[i][j];
 						current.reduceBreedTime();
@@ -186,7 +186,7 @@ public class WatorModel {
 							//shark breed behavior
 							ArrayList<Point> breedAreas = getValidPointArray(current, WATER_TAG);
 							if(!breedAreas.isEmpty()) {
-								int randomNum = random.nextInt(breedAreas.size() + 1);
+								int randomNum = random.nextInt((breedAreas.size() -1) + 1);
 								Point breedPoint = breedAreas.get(randomNum);
 								
 								myWatorModel[breedPoint.x][breedPoint.y] = new Shark(SHARK_TAG, breedPoint.x, breedPoint.y, myWatorModel);
@@ -200,7 +200,7 @@ public class WatorModel {
 						//eat behavior
 						ArrayList<Point> eatAreas = getValidPointArray(current, FISH_TAG);
 						if(!eatAreas.isEmpty()) {
-							int randomNum = random.nextInt(eatAreas.size() + 1);
+							int randomNum = random.nextInt((eatAreas.size() -1) + 1);
 							
 							Point eatPoint = eatAreas.get(randomNum);
 							
