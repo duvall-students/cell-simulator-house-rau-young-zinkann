@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 public class Shark extends WatorCreature {
 	
 	private int myStarveTime;
@@ -8,6 +10,7 @@ public class Shark extends WatorCreature {
 	public Shark(int tag, int row, int col, WatorObject[][] watorWorld) {
 		super(tag, row, col, watorWorld);
 		super.myBreedTime = 20;
+		myRectangle.setFill(Color.YELLOW);
 		myStarveTime = 5;
 	}
 	
