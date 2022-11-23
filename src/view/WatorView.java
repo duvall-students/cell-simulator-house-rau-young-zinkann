@@ -53,6 +53,9 @@ public class WatorView extends Application {
 	private WatorModel cellModel;
 
 	public void start(Stage stage) {
+		// Initialize the model
+		cellModel = new WatorModel(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS);
+
 		// Initializing the gui
 		myScene = setupScene();
 		stage.setScene(myScene);
@@ -75,14 +78,14 @@ public class WatorView extends Application {
 		//			doOneStep(elapsedTime);
 		//		}
 	}
-	
+
 	public void foo() {
-		
+
 	}
 
 	private Scene setupScene() {
 		// Make containers
-		Group cellDrawing = setupCells();
+		Group cellDrawing = setupInitialCells();
 		HBox controls = setupControlButtons();
 		HBox textField = setupTextField();
 
@@ -129,23 +132,38 @@ public class WatorView extends Application {
 		return textFieldBox;
 	}
 
-	private Group setupCells() {
+	private Group setupInitialCells() {
 		Group drawing = new Group();
-		cells = new Rectangle[INITIAL_NUM_ROWS + 1][INITIAL_NUM_COLUMNS + 1];
+		cells = new Rectangle[INITIAL_NUM_ROWS][INITIAL_NUM_COLUMNS];
+		// get cells from model
+		Rectangle[][] modelCells = cellModel.getWatorModelView();
 
-		for(int i = 0; i < INITIAL_NUM_ROWS + 1; i++){
-			for(int j = 0; j < INITIAL_NUM_COLUMNS + 1; j++){
-				Rectangle rect = new Rectangle(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-
-				if (i == 0 || j == 0 || i == INITIAL_NUM_ROWS || j == INITIAL_NUM_COLUMNS) {
-					rect.setFill(Color.WHITE);
-				} else {
-					rect.setFill(Color.YELLOW);
-				}
-
-				cells[i][j] = rect;
+//		for(int i = 0; i < INITIAL_NUM_ROWS + 1; i++){
+//			
+//			for(int j = 0; j < INITIAL_NUM_COLUMNS + 1; j++){
+//
+//				if (i == 0 || j == 0 || i == INITIAL_NUM_ROWS || j == INITIAL_NUM_COLUMNS) {
+//					Rectangle rect = new Rectangle(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+//					rect.setFill(Color.BLACK);
+//					cells[i][j] = rect;
+//					drawing.getChildren().add(rect);
+//				} else {
+//					//Rectangle rect = new Rectangle(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+//					// populate group with wator objects
+//					Rectangle rect = modelCells[i - 1][j - 1];
+//					//rect.setFill(Color.YELLOW);
+//					cells[i][j] = rect;
+//					drawing.getChildren().add(rect);
+//				}
+//			}	
+//		}
+		
+		for (int i = 0; i < INITIAL_NUM_ROWS; i++) {
+			for (int j = 0; j < INITIAL_NUM_COLUMNS; j++) {
+				Rectangle rect = modelCells[i][j];
+				cells[i][j] = modelCells[i][j];
 				drawing.getChildren().add(rect);
-			}	
+			}
 		}
 		return drawing;
 	}

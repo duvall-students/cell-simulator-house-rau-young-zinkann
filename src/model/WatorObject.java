@@ -39,4 +39,9 @@ public class WatorObject {
 	public Node getView() {
 		return myRectangle;
 	}
+	
+	public void setLocation(int x, int y) {
+		myRectangle.setX(x);
+		myRectangle.setY(y);
+	}
 }

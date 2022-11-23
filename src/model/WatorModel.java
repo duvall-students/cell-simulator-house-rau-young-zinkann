@@ -77,8 +77,9 @@ public class WatorModel {
 			return new Fish(FISH_TAG,row, col, myWatorModel);
 		} else if (sharkDensity <  r && r < waterDensity + sharkDensity) {
 			return new Water(WATER_TAG, row, col, myWatorModel);
+		} else {
+		return new Shark(SHARK_TAG, row, col, myWatorModel);
 		}
-		return new Shark(SHARK_TAG, row, col, myWatorModel);		
 	}
 	
 	
@@ -213,6 +214,7 @@ public class WatorModel {
 		
 		for(int i = 0; i < myWatorModel.length; i++) {
 			for(int j = 0; j < myWatorModel[i].length; j++) {
+				myWatorModel[i][j].setLocation(i, j);
 				views[i][j] = (Rectangle) myWatorModel[i][j].getView();
 			}
 		}
