@@ -134,43 +134,32 @@ public class WatorView extends Application {
 
 	private Group setupInitialCells() {
 		Group drawing = new Group();
-		cells = new Rectangle[INITIAL_NUM_ROWS][INITIAL_NUM_COLUMNS];
+		cells = new Rectangle[INITIAL_NUM_ROWS + 2][INITIAL_NUM_COLUMNS + 2];
 		// get cells from model
 		Rectangle[][] modelCells = cellModel.getWatorModelView(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS);
 
-//		for(int i = 0; i < INITIAL_NUM_ROWS + 1; i++){
-//			
-//			for(int j = 0; j < INITIAL_NUM_COLUMNS + 1; j++){
-//
-//				if (i == 0 || j == 0 || i == INITIAL_NUM_ROWS || j == INITIAL_NUM_COLUMNS) {
-//					Rectangle rect = new Rectangle(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-//					rect.setFill(Color.BLACK);
-//					cells[i][j] = rect;
-//					drawing.getChildren().add(rect);
-//				} else {
-//					//Rectangle rect = new Rectangle(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-//					// populate group with wator objects
-//					Rectangle rect = modelCells[i - 1][j - 1];
-//					//rect.setFill(Color.YELLOW);
-//					cells[i][j] = rect;
-//					drawing.getChildren().add(rect);
-//				}
-//			}	
-//		}
-		
-		for (int i = 0; i < INITIAL_NUM_ROWS; i++) {
-			for (int j = 0; j < INITIAL_NUM_COLUMNS; j++) {
-				Rectangle rect = modelCells[i][j];
-				cells[i][j] = modelCells[i][j];
-				drawing.getChildren().add(rect);
+		// initial group population
+		for (int i = 0; i <= INITIAL_NUM_ROWS; i++) {
+			for (int j = 0; j <= INITIAL_NUM_COLUMNS; j++) {
+				// if edge case, then make black
+				if (i == 0 || j == 0 || i == INITIAL_NUM_ROWS || j == INITIAL_NUM_COLUMNS) {
+					Rectangle rect = new Rectangle(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+					rect.setFill(Color.BLACK);
+					cells[i][j] = rect;
+					drawing.getChildren().add(rect);
+				} 
+				// else, get the wator cells from the model
+				else {
+					Rectangle rect = modelCells[i][j];
+					cells[i][j] = modelCells[i][j];
+					drawing.getChildren().add(rect);
+				}
+
 			}
 		}
 		return drawing;
 	}
 
-	public WatorObject getCellState(Point position) {
-		return cellModel.get(position);
-	}
 
 	public static void main(String[] args) {
 		launch(args);
