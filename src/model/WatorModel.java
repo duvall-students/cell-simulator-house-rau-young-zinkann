@@ -141,7 +141,6 @@ public class WatorModel {
 						ArrayList<Point> breedAreas = getValidPointArray(currentFish, WATER_TAG);
 						if(!breedAreas.isEmpty()) {
 							int randomNum = random.nextInt((breedAreas.size() - 1) + 1);
-							System.out.println(randomNum);
 							
 							Point breedPoint = breedAreas.get(randomNum);
 							
