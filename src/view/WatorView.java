@@ -74,6 +74,10 @@ public class WatorView extends Application {
 		//			doOneStep(elapsedTime);
 		//		}
 	}
+	
+	public void foo() {
+		
+	}
 
 	private Scene setupScene() {
 		// Make containers
