@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Point;
 
+import javafx.scene.Node;
 import javafx.scene.shape.Rectangle;
 
 public class WatorObject {
@@ -33,5 +34,9 @@ public class WatorObject {
 	
 	public void setLocation(Point newLocation) {
 		location = newLocation;
+	}
+	
+	public Node getView() {
+		return myRectangle;
 	}
 }

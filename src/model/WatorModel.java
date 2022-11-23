@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javafx.scene.shape.Rectangle;
 
 public class WatorModel {
 	// Possible states of squares that make up a maze
@@ -203,5 +204,18 @@ public class WatorModel {
 				
 			}
 		}
+		
+	
   }
+	
+	public Rectangle[][] getWatorModelView(){
+		Rectangle[][] views =  new Rectangle[myWatorModel.length][myWatorModel[0].length];
+		
+		for(int i = 0; i < myWatorModel.length; i++) {
+			for(int j = 0; j < myWatorModel[i].length; j++) {
+				views[i][j] = (Rectangle) myWatorModel[i][j].getView();
+			}
+		}
+		return views;
+	}
 }
