@@ -36,6 +36,8 @@ public class WatorObject {
 	
 	public void setLocation(Point newLocation) {
 		location = newLocation;
+		myRectangle.setX(location.x * BLOCK_SIZE);
+		myRectangle.setY(location.y * BLOCK_SIZE);
 	}
 	
 	public Node getView() {
