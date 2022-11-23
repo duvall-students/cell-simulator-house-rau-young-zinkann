@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.WatorModel;
+import model.WatorObject;
 
 import java.awt.Point;
 import javafx.animation.KeyFrame;
@@ -149,7 +150,7 @@ public class WatorView extends Application {
 		return drawing;
 	}
 
-	public int getCellState(Point position) {
+	public WatorObject getCellState(Point position) {
 		return cellModel.get(position);
 	}
 
