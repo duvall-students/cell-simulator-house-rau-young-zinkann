@@ -37,30 +37,25 @@ public class WatorView extends Application {
 	 * GUI settings
 	 */
 	private final int MILLISECOND_DELAY = 15;	// speed of animation
-	private final int EXTRA_VERTICAL = 100; 	// GUI area allowance when making the scene width
-	private final int EXTRA_HORIZONTAL = 150; 	// GUI area allowance when making the scene width
 	private final int BLOCK_SIZE = 12;     		// size of each cell in pixels
 	private final int INITIAL_NUM_ROWS = 30; 
 	private final int INITIAL_NUM_COLUMNS = 80;
 
-	private int numRows;
-	private int numColumns;
 	private Scene myScene;						// the container for the GUI
-	private boolean paused = false;		
-	private Button pauseButton;
+	private Button pausedButton;
 	private TextField inputField;
 
 	private Rectangle[][] cells;				// the Rectangle objects that will get updated and drawn
 
-	private WatorModel cellModel;
-	private WatorController cellController;
+	private WatorModel model;
+	private WatorController controller;
 
 	public void start(Stage stage) {
 		// Initialize the model
-		cellModel = new WatorModel(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS);
-		
+		model = new WatorModel(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS);
+
 		// Initialize the controller
-		cellController = new WatorController();
+		controller = new WatorController(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS, this);
 
 		// Initializing the gui
 		myScene = setupScene();
@@ -79,14 +74,10 @@ public class WatorView extends Application {
 	/*
 	 * Does a step in the search only if not paused.
 	 */
-	public void step(double elapsedTime){
-		//		if(!paused) {
-		//			doOneStep(elapsedTime);
-		//		}
-	}
-
-	public void foo() {
-
+	public void step(double elapsedTime) {
+		if(!controller.isPaused()) {
+			controller.doOneStep(elapsedTime);
+		}
 	}
 
 	private Scene setupScene() {
@@ -140,33 +131,33 @@ public class WatorView extends Application {
 		textFieldBox.setSpacing(10);
 		return textFieldBox;
 	}
-	
+
 	private HBox setupBottomButtons() {
 		HBox controls = new HBox();
 		controls.setAlignment(Pos.BASELINE_CENTER);
 		controls.setSpacing(10);
-		
+
 		// start new simulation button
 		Button newSimulationButton = new Button("New Simulation");
 		newSimulationButton.setOnAction(value -> {
 			// controller
 		});
 		controls.getChildren().add(newSimulationButton);
-		
+
 		// take a single step
 		Button takeStepButton = new Button("Step");
 		takeStepButton.setOnAction(value -> {
 			// controller
 		});
 		controls.getChildren().add(takeStepButton);
-		
+
 		// pause
-		pauseButton = new Button("Pause");
-		pauseButton.setOnAction(value -> {
+		pausedButton = new Button("Pause");
+		pausedButton.setOnAction(value -> {
 			// controller
 		});
-		controls.getChildren().add(pauseButton);
-		
+		controls.getChildren().add(pausedButton);
+
 		return controls;
 	}
 
@@ -174,7 +165,7 @@ public class WatorView extends Application {
 		Group drawing = new Group();
 		cells = new Rectangle[INITIAL_NUM_ROWS + 2][INITIAL_NUM_COLUMNS + 2];
 		// get cells from model
-		Rectangle[][] modelCells = cellModel.getWatorModelView(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS);
+		Rectangle[][] modelCells = model.getWatorModelView(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS);
 
 		// initial group population
 		for (int i = 0; i <= INITIAL_NUM_ROWS; i++) {
