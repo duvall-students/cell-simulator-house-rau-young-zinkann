@@ -7,6 +7,15 @@ import view.WatorView;
 
 public class WatorController {
 
+
+	private WatorModel model;
+	private WatorView simulationDisplay;
+
+	public WatorController(int width, int height, WatorVi simulationDisplay) {	
+			this.simulationDisplay=  simulationDisplay;
+			this.model = new WatorModel(width,height);
+		}
+
 //	private Model model;
 //	private SimulationDisplay simulationDisplay;
 
