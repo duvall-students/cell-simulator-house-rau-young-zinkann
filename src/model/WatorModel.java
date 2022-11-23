@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
+
 import javafx.scene.shape.Rectangle;
 
 public class WatorModel {
@@ -17,9 +19,9 @@ public class WatorModel {
 	
 	
 	
-	private double waterDensity = 0.2;
-	private double sharkDensity = 0.1;
-	private double fishDensity = 0.7;
+	private int waterDensity = 3;
+	private double sharkDensity = 1;
+	private double fishDensity = 10;
 
 
 	private WatorObject[][] myWatorModel;	// The squares making up the maze
@@ -67,17 +69,18 @@ public class WatorModel {
 		int i,j;
 		for (i = 0; i<rows; i++)
 			for (j = 0; j < cols; j++)
-				myWatorModel[i][j] = PopulateObject(i,j);
+				myWatorModel[i][j] = populateObject(i,j);
 	}
 	
-	public WatorObject PopulateObject (int row, int col) {
+	public WatorObject populateObject (int row, int col) {
 		//get random double through our range 
-		double r = Math.random() * (max -min) - min;
-		if(r >= waterDensity + sharkDensity) {
+		Random random = new Random();
+		int r = random.nextInt((10-1+ 1)) + 1;
+		if(r > waterDensity && r >sharkDensity) {
 			return new Fish(FISH_TAG,row, col, myWatorModel);
-		} else if (sharkDensity <  r && r < waterDensity + sharkDensity) {
+		} else if (r < fishDensity && r > sharkDensity) {
 			return new Water(WATER_TAG, row, col, myWatorModel);
-		} else {
+		} else { 
 		return new Shark(SHARK_TAG, row, col, myWatorModel);
 		}
 	}
@@ -209,12 +212,11 @@ public class WatorModel {
 	
   }
 	
-	public Rectangle[][] getWatorModelView(){
-		Rectangle[][] views =  new Rectangle[myWatorModel.length][myWatorModel[0].length];
-		
+	public Rectangle[][] getWatorModelView(int row, int column){
+		Rectangle[][] views =  new Rectangle[row][column];
 		for(int i = 0; i < myWatorModel.length; i++) {
 			for(int j = 0; j < myWatorModel[i].length; j++) {
-				myWatorModel[i][j].setLocation(i, j);
+				//myWatorModel[i][j].setLocation(i, j);
 				views[i][j] = (Rectangle) myWatorModel[i][j].getView();
 			}
 		}
