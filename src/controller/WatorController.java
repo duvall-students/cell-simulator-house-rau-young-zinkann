@@ -33,10 +33,13 @@ public class WatorController {
 //		simulationDisplay.redraw();
 //	}
 //	
-//	public void doOneStep(double elapsedTime){
-//		model.step();
-//		simulationDisplay.redraw();
-//	}
+	public void doOneStep(double elapsedTime){
+		model.update();
+	}
+	
+	public void step(double elapsedTime) {
+		doOneStep(elapsedTime);
+	}
 //
 //	public int getCellState(Point position) {
 //		return model.get(position);
