@@ -10,7 +10,5 @@ public class Fish extends WatorCreature{
 		myRectangle.setFill(Color.GREEN);
 	}
 	
-	
-	
 
 }

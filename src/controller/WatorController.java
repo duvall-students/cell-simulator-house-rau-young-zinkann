@@ -9,41 +9,29 @@ public class WatorController {
 
 
 	private WatorModel model;
-	private WatorView simulationDisplay;
+	private WatorView view;
+	private boolean paused = false;
 
-	public WatorController(int width, int height, WatorView simulationDisplay) {	
-			this.simulationDisplay=  simulationDisplay;
-			this.model = new WatorModel(width,height);
-		}
-
-//	private Model model;
-//	private SimulationDisplay simulationDisplay;
-
-//	public WatorController(int width, int height, SimulationDisplay simulationDisplay) {	
-//			this.simulationDisplay=  simulationDisplay;
-//			this.model = new Model(width,height);
-//		}
-	
-	public WatorController() {
-		
+	public WatorController(int rows, int columns, WatorView view) {	
+		this.view =  view;
+		this.model = new WatorModel(rows, columns);
 	}
-	
-//	public void newSimulation() {
-//		model.createSimulation();
-//		simulationDisplay.redraw();
-//	}
-//	
+
 	public void doOneStep(double elapsedTime){
 		model.update();
 	}
-	
+
 	public void step(double elapsedTime) {
 		doOneStep(elapsedTime);
 	}
-//
-//	public int getCellState(Point position) {
-//		return model.get(position);
-//	}
-	
-	
+
+	public boolean isPaused() {
+		return paused;
+	}
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
+
+
 }

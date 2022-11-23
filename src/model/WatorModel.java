@@ -130,7 +130,8 @@ public class WatorModel {
 			for(int j = 0; j < myWatorModel[i].length; j++) {
 				//check is fish 
 				if(myWatorModel[i][j].getTag() == 1) {
-					Fish current = (Fish)myWatorModel[i][j];
+					Fish current = (Fish) myWatorModel[i][j];
+					
 					//reduce breed time for the cycle 
 					current.reduceBreedTime();
 					
