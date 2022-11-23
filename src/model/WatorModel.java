@@ -125,6 +125,7 @@ public class WatorModel {
 	
 	public void update() {
 		//loop through each object
+		Random random = new Random();
 		for(int i = 0; i < myWatorModel.length; i++) {
 			for(int j = 0; j < myWatorModel[i].length; j++) {
 				//check is fish 
@@ -138,7 +139,8 @@ public class WatorModel {
 						//breed behavior *refactor 
 						ArrayList<Point> breedAreas = getValidPointArray(current, WATER_TAG);
 						if(!breedAreas.isEmpty()) {
-							int randomNum = (int) Math.random() * (breedAreas.size() - 1);
+							int randomNum = random.nextInt(breedAreas.size() + 1);
+							
 							Point breedPoint = breedAreas.get(randomNum);
 							
 							myWatorModel[breedPoint.x][breedPoint.y] = new Fish(FISH_TAG, breedPoint.x, breedPoint.y, myWatorModel);
@@ -150,7 +152,7 @@ public class WatorModel {
 					ArrayList<Point> swimAreas = getValidPointArray(current, WATER_TAG);
 					if(!swimAreas.isEmpty()) {
 						//swim logic
-						int randomNum = (int) Math.random() * (swimAreas.size() - 1);
+						int randomNum = random.nextInt(swimAreas.size() + 1);
 						Point swimPoint = swimAreas.get(randomNum);
 						Point previousPoint = current.getLocation();
 						
@@ -166,6 +168,7 @@ public class WatorModel {
 				}
 				//check shark
 				if(myWatorModel[i][j].getTag() == 2) {
+					
 						Shark current = (Shark)myWatorModel[i][j];
 						current.reduceBreedTime();
 						current.reduceStarveTime();
@@ -182,7 +185,7 @@ public class WatorModel {
 							//shark breed behavior
 							ArrayList<Point> breedAreas = getValidPointArray(current, WATER_TAG);
 							if(!breedAreas.isEmpty()) {
-								int randomNum = (int) Math.random() * (breedAreas.size() - 1);
+								int randomNum = random.nextInt(breedAreas.size() + 1);
 								Point breedPoint = breedAreas.get(randomNum);
 								
 								myWatorModel[breedPoint.x][breedPoint.y] = new Shark(SHARK_TAG, breedPoint.x, breedPoint.y, myWatorModel);
@@ -196,7 +199,7 @@ public class WatorModel {
 						//eat behavior
 						ArrayList<Point> eatAreas = getValidPointArray(current, FISH_TAG);
 						if(!eatAreas.isEmpty()) {
-							int randomNum = (int) Math.random() * (eatAreas.size() - 1);
+							int randomNum = random.nextInt(eatAreas.size() + 1);
 							
 							Point eatPoint = eatAreas.get(randomNum);
 							
