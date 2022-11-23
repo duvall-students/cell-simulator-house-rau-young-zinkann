@@ -86,21 +86,22 @@ public class WatorView extends Application {
 	private Scene setupScene() {
 		// Make containers
 		Group cellDrawing = setupInitialCells();
-		HBox controls = setupControlButtons();
+		HBox topButtons = setupTopButtons();
 		HBox textField = setupTextField();
+		HBox bottomButtons = setupBottomButtons();
 
 		VBox root = new VBox();
 		root.setAlignment(Pos.TOP_CENTER);
 		root.setSpacing(10);
 		root.setPadding(new Insets(10, 10, 10, 10));
-		root.getChildren().addAll(controls, textField, cellDrawing);
+		root.getChildren().addAll(topButtons, textField, cellDrawing, bottomButtons);
 
 		Scene scene = new Scene(root, Color.LIGHTBLUE);
 
 		return scene;
 	}
 
-	private HBox setupControlButtons() {
+	private HBox setupTopButtons() {
 		// Make the controls parts
 		HBox controls = new HBox();
 		controls.setAlignment(Pos.BASELINE_CENTER);
@@ -108,13 +109,15 @@ public class WatorView extends Application {
 
 		Button setNumRowsButton = new Button("Set Num Rows");
 		setNumRowsButton.setOnAction(value -> {
-			numRows = Integer.parseInt(inputField.getText());
+			// controller
+			//numRows = Integer.parseInt(inputField.getText());
 		});
 		controls.getChildren().add(setNumRowsButton);
 
 		Button setNumColumnsButton = new Button("Set Num Columns");
 		setNumColumnsButton.setOnAction(value -> {
-			numColumns = Integer.parseInt(inputField.getText());
+			// controller
+			//numColumns = Integer.parseInt(inputField.getText());
 		});
 		controls.getChildren().add(setNumColumnsButton);
 
@@ -130,6 +133,35 @@ public class WatorView extends Application {
 		textFieldBox.getChildren().add(inputField);
 		textFieldBox.setSpacing(10);
 		return textFieldBox;
+	}
+	
+	private HBox setupBottomButtons() {
+		HBox controls = new HBox();
+		controls.setAlignment(Pos.BASELINE_CENTER);
+		controls.setSpacing(10);
+		
+		// start new simulation button
+		Button newSimulationButton = new Button("New Simulation");
+		newSimulationButton.setOnAction(value -> {
+			// controller
+		});
+		controls.getChildren().add(newSimulationButton);
+		
+		// take a single step
+		Button takeStepButton = new Button("Step");
+		takeStepButton.setOnAction(value -> {
+			// controller
+		});
+		controls.getChildren().add(takeStepButton);
+		
+		// pause
+		pauseButton = new Button("Pause");
+		pauseButton.setOnAction(value -> {
+			// controller
+		});
+		controls.getChildren().add(pauseButton);
+		
+		return controls;
 	}
 
 	private Group setupInitialCells() {
