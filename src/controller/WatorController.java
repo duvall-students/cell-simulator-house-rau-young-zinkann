@@ -4,37 +4,36 @@ import java.awt.Point;
 
 import model.WatorModel;
 import view.WatorView;
-
-/*
- *  wzinkann
- */
-
+/* 
+Will Zinkann
+*/
 public class WatorController {
 
+
 	private WatorModel model;
-	private WatorView simulationDisplay;
+	private WatorView view;
+	private boolean paused = false;
 
-	public WatorController(int width, int height, WatorView simulationDisplay) {
-		this.simulationDisplay = simulationDisplay;
-		this.model = new WatorModel(width, height);
+	public WatorController(int rows, int columns, WatorView view) {	
+		this.view =  view;
+		this.model = new WatorModel(rows, columns);
 	}
 
-	public void newSimulation() {
-		model.createSimulation();
-		simulationDisplay.redraw();
-	}
-	
-	public void pauseSimulation() {
-
+	public void doOneStep(double elapsedTime){
+		model.update();
 	}
 
-	public void doOneStep(double elapsedTime) {
-		model.step();
-		simulationDisplay.redraw();
+	public void step(double elapsedTime) {
+		doOneStep(elapsedTime);
 	}
 
-	public int getCellState(Point position) {
-		return model.get(position);
+	public boolean isPaused() {
+		return paused;
 	}
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
+
 
 }
