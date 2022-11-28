@@ -7,6 +7,7 @@ import model.WatorModel;
 import model.WatorObject;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import controller.WatorController;
 import javafx.animation.KeyFrame;
@@ -55,7 +56,7 @@ public class WatorView extends Application {
 		model = new WatorModel(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS);
 
 		// Initialize the controller
-		controller = new WatorController(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS, this);
+		controller = new WatorController(INITIAL_NUM_ROWS, INITIAL_NUM_COLUMNS, this, model);
 
 		// Initializing the gui
 		myScene = setupScene();
@@ -99,6 +100,7 @@ public class WatorView extends Application {
 	}
 
 	private HBox setupTopButtons() {
+		ArrayList<Integer> changeSize = new ArrayList<Integer>();
 		// Make the controls parts
 		HBox controls = new HBox();
 		controls.setAlignment(Pos.BASELINE_CENTER);
@@ -107,14 +109,15 @@ public class WatorView extends Application {
 		Button setNumRowsButton = new Button("Set Num Rows");
 		setNumRowsButton.setOnAction(value -> {
 			// controller
-			//numRows = Integer.parseInt(inputField.getText());
+			changeSize.add(Integer.parseInt(inputField.getText()));
 		});
 		controls.getChildren().add(setNumRowsButton);
 
 		Button setNumColumnsButton = new Button("Set Num Columns");
 		setNumColumnsButton.setOnAction(value -> {
 			// controller
-			//numColumns = Integer.parseInt(inputField.getText());
+			changeSize.add(Integer.parseInt(inputField.getText()));
+			controller.updateBoardSize(changeSize);
 		});
 		controls.getChildren().add(setNumColumnsButton);
 
@@ -140,7 +143,7 @@ public class WatorView extends Application {
 		// start new simulation button
 		Button newSimulationButton = new Button("New Simulation");
 		newSimulationButton.setOnAction(value -> {
-			// controller
+			newMaze();
 		});
 		controls.getChildren().add(newSimulationButton);
 
@@ -161,7 +164,7 @@ public class WatorView extends Application {
 		return controls;
 	}
 
-	private Group setupInitialCells() {
+	public Group setupInitialCells() {
 		Group drawing = new Group();
 		cells = new Rectangle[INITIAL_NUM_ROWS + 2][INITIAL_NUM_COLUMNS + 2];
 		// get cells from model
@@ -188,8 +191,22 @@ public class WatorView extends Application {
 		}
 		return drawing;
 	}
-
-
+	
+	//Ben- redraws view based on model
+	public void redraw(int col, int row){
+		Rectangle[][] modelCells = model.getWatorModelView(col, row);
+		for(int i = 0; i<= cells.length; i++){
+			for(int j =0; j <= cells[i].length; j++){
+				cells[i][j] = modelCells[i][j];
+			}
+		}
+	}
+	//Ben - creates a new maze
+	public void newMaze() {
+		model.createWatorWorld(model.getNumRows(),model.getNumCols());
+		redraw(model.getNumRows(),model.getNumCols());
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
