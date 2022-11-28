@@ -4,9 +4,9 @@ import java.awt.Point;
 
 import model.WatorModel;
 import view.WatorView;
-/* 
-Will Zinkann
-*/
+
+/* Will Zinkann */
+
 public class WatorController {
 
 
