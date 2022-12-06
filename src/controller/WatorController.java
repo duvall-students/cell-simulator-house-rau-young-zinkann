@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Point;
 
+import javafx.scene.shape.Rectangle;
 import model.WatorModel;
 import view.WatorView;
 
@@ -33,6 +34,16 @@ public class WatorController {
 
 	public void setPaused(boolean paused) {
 		this.paused = paused;
+	}
+
+	public Rectangle[][] getWatorModelView(int rows, int columns) {
+		Rectangle[][] views = new Rectangle[rows][columns];
+		for (int i = 0; i < model.getMyWatorModel().length; i++) {
+			for (int j = 0; j < model.getMyWatorModel()[i].length; j++) {
+				views[i][j] = (Rectangle) model.getMyWatorModel()[i][j].getView();
+			}
+		}
+		return views;
 	}
 
 

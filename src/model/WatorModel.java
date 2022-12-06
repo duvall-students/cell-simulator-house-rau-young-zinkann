@@ -223,4 +223,8 @@ public class WatorModel {
 		}
 		return views;
 	}
+	
+	public WatorObject[][] getMyWatorModel() {
+		return myWatorModel;
+	}
 }

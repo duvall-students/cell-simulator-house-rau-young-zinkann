@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -45,7 +46,7 @@ public class WatorView extends Application {
 	private Button pausedButton;
 	private TextField inputField;
 
-	private Rectangle[][] cells;				// the Rectangle objects that will get updated and drawn
+	private Rectangle[][] cells;				// the Paint objects that will get updated and drawn
 
 	private WatorModel model;
 	private WatorController controller;
