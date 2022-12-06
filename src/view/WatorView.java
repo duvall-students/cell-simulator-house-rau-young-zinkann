@@ -37,7 +37,7 @@ public class WatorView extends Application {
 	/*
 	 * GUI settings
 	 */
-	private final int MILLISECOND_DELAY = 15;	// speed of animation
+	private final int MILLISECOND_DELAY = 1000;	// speed of animation
 	private final int BLOCK_SIZE = 12;     		// size of each cell in pixels
 	private final int INITIAL_NUM_ROWS = 30; 
 	private final int INITIAL_NUM_COLUMNS = 80;
@@ -188,6 +188,20 @@ public class WatorView extends Application {
 			}
 		}
 		return drawing;
+	}
+	
+	public void redraw() {
+		Color[][] updatedColors = controller.getUpdatedModelColor();
+		
+		for (int i = 0; i <= INITIAL_NUM_ROWS; i++) {
+			for (int j = 0; j <= INITIAL_NUM_COLUMNS; j++) {
+				// ignore black boundaries
+				if (!(i == 0 || j == 0 || i == INITIAL_NUM_ROWS || j == INITIAL_NUM_COLUMNS)) {
+					Rectangle rect = cells[i][j];
+					rect.setFill(updatedColors[i][j]);
+				}
+			}
+		}
 	}
 
 
