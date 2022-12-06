@@ -15,10 +15,15 @@ public class WatorController {
 	private WatorModel model;
 	private WatorView view;
 	private boolean paused = false;
+	
+	private int rows;
+	private int columns;
 
 	public WatorController(int rows, int columns, WatorView view) {	
 		this.view =  view;
 		this.model = new WatorModel(rows, columns);
+		this.rows = rows;
+		this.columns = columns;
 	}
 
 	public void doOneStep(double elapsedTime){
@@ -67,6 +72,22 @@ public class WatorController {
 
 	public WatorModel getModel() {
 		return model;
+	}
+	
+	public void setColumns(int columns) {
+		this.columns = columns;
+	}
+	
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+	
+	public int getColumns() {
+		return columns;
+	}
+	
+	public int getRows() {
+		return rows;
 	}
 
 }
