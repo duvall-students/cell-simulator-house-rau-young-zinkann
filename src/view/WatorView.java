@@ -46,7 +46,7 @@ public class WatorView extends Application {
 	private Button pausedButton;
 	private TextField inputField;
 
-	private Rectangle[][] cells;				// the Paint objects that will get updated and drawn
+	private Rectangle[][] cells;				// the Rectangle objects that will get updated and drawn
 
 	private WatorModel model;
 	private WatorController controller;
@@ -142,6 +142,7 @@ public class WatorView extends Application {
 		Button newSimulationButton = new Button("New Simulation");
 		newSimulationButton.setOnAction(value -> {
 			// controller
+			
 		});
 		controls.getChildren().add(newSimulationButton);
 
@@ -149,6 +150,7 @@ public class WatorView extends Application {
 		Button takeStepButton = new Button("Step");
 		takeStepButton.setOnAction(value -> {
 			// controller
+			controller.doOneStep(MILLISECOND_DELAY);
 		});
 		controls.getChildren().add(takeStepButton);
 
@@ -156,6 +158,7 @@ public class WatorView extends Application {
 		pausedButton = new Button("Pause");
 		pausedButton.setOnAction(value -> {
 			// controller
+			controller.setPaused(!controller.isPaused());
 		});
 		controls.getChildren().add(pausedButton);
 
@@ -193,16 +196,21 @@ public class WatorView extends Application {
 	public void redraw() {
 		Color[][] updatedColors = controller.getUpdatedModelColor();
 		
-		for (int i = 0; i <= INITIAL_NUM_ROWS; i++) {
-			for (int j = 0; j <= INITIAL_NUM_COLUMNS; j++) {
+		for (int i = 0; i <= controller.getModelRows(); i++) {
+			for (int j = 0; j <= controller.getModelCols(); j++) {
 				// ignore black boundaries
-				if (!(i == 0 || j == 0 || i == INITIAL_NUM_ROWS || j == INITIAL_NUM_COLUMNS)) {
+				if (!(i == 0 || j == 0 || i == controller.getModelRows() || j == controller.getModelCols())) {
 					Rectangle rect = cells[i][j];
 					rect.setFill(updatedColors[i][j]);
 				}
 			}
 		}
 	}
+	
+	public void newSimulaion() {
+		// code goes here
+        redraw();
+    }
 
 
 	public static void main(String[] args) {
