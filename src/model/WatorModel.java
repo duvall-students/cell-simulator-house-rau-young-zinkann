@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class WatorModel {
@@ -71,9 +70,12 @@ public class WatorModel {
 		assert(rows > 0 && cols > 0);
 		myWatorModel = new WatorObject[rows][cols];
 		int i,j;
-		for (i = 0; i<rows; i++)
-			for (j = 0; j < cols; j++)
+		for (i = 0; i<rows; i++) {
+			for (j = 0; j < cols; j++) {
 				myWatorModel[i][j] = populateObject(i,j);
+			}
+		}
+		
 	}
 	
 	public WatorObject populateObject (int row, int col) {
