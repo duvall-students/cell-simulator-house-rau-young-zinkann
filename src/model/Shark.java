@@ -43,13 +43,13 @@ public class Shark extends WatorCreature {
 	
 	public void eat(Point eatPoint) {
 		myStarveTime = originalStarveTime;
-		System.out.println("Shark has eaten");
+		//System.out.println("Shark has eaten");
 		myWatorWorld[eatPoint.x][eatPoint.y] = new Water(WATER_TAG, eatPoint.x, eatPoint.y, myWatorWorld);
 		
 	}
 	
 	public void starve(int x, int y) {
-		System.out.println("Shark has starved");
+		//System.out.println("Shark has starved");
 		myWatorWorld[x][y] = new Water(WATER_TAG, x, y, myWatorWorld);
 	}
 	
