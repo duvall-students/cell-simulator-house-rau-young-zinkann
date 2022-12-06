@@ -142,7 +142,7 @@ public class WatorView extends Application {
 		Button newSimulationButton = new Button("New Simulation");
 		newSimulationButton.setOnAction(value -> {
 			// controller
-			
+			newSimulaion();
 		});
 		controls.getChildren().add(newSimulationButton);
 
@@ -209,6 +209,7 @@ public class WatorView extends Application {
 	
 	public void newSimulaion() {
 		// code goes here
+		controller.getModel().createWatorWorld(controller.getModelRows(), controller.getModelCols());
         redraw();
     }
 

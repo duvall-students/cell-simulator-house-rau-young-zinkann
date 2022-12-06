@@ -65,5 +65,8 @@ public class WatorController {
 		return model.getNumCols();
 	}
 
+	public WatorModel getModel() {
+		return model;
+	}
 
 }
