@@ -26,8 +26,13 @@ public class WatorController {
 		view.redraw();
 	}
 
+	/*
+	 * Does a step in the search only if not paused.
+	 */
 	public void step(double elapsedTime) {
-		doOneStep(elapsedTime);
+		if(!isPaused()) {
+			doOneStep(elapsedTime);
+		}
 	}
 
 	public boolean isPaused() {
@@ -47,15 +52,15 @@ public class WatorController {
 		}
 		return views;
 	}
-	
+
 	public Color[][] getUpdatedModelColor() {
 		return model.getUpdatedWatorModel(model.getNumRows(), model.getNumCols());
 	}
-	
+
 	public int getModelRows() {
 		return model.getNumRows();
 	}
-	
+
 	public int getModelCols() {
 		return model.getNumCols();
 	}

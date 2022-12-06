@@ -10,7 +10,7 @@ public class Fish extends WatorCreature{
 
 	public Fish(int tag, int row, int column, WatorObject[][] watorWorld) {
 		super(tag, row, column, watorWorld);
-		super.myBreedTime = 1;
+		super.myBreedTime = 2;
 		super.initialBreedTime = 1;
 		myRectangle.setFill(Color.GREEN);
 		super.watorObjectColor = Color.GREEN;
