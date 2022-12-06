@@ -2,8 +2,12 @@ package controller;
 
 import java.awt.Point;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import model.WatorModel;
 import view.WatorView;
+
+/* Will Zinkann */
 
 public class WatorController {
 
@@ -19,6 +23,7 @@ public class WatorController {
 
 	public void doOneStep(double elapsedTime){
 		model.update();
+		view.redraw();
 	}
 
 	public void step(double elapsedTime) {
@@ -31,6 +36,28 @@ public class WatorController {
 
 	public void setPaused(boolean paused) {
 		this.paused = paused;
+	}
+
+	public Rectangle[][] getWatorModelView(int rows, int columns) {
+		Rectangle[][] views = new Rectangle[rows][columns];
+		for (int i = 0; i < model.getMyWatorModel().length; i++) {
+			for (int j = 0; j < model.getMyWatorModel()[i].length; j++) {
+				views[i][j] = (Rectangle) model.getMyWatorModel()[i][j].getView();
+			}
+		}
+		return views;
+	}
+	
+	public Color[][] getUpdatedModelColor() {
+		return model.getUpdatedWatorModel(model.getNumRows(), model.getNumCols());
+	}
+	
+	public int getModelRows() {
+		return model.getNumRows();
+	}
+	
+	public int getModelCols() {
+		return model.getNumCols();
 	}
 
 

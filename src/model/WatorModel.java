@@ -240,4 +240,8 @@ public class WatorModel {
 		}
 		return updatedWatorModel;
 	}
+	
+	public WatorObject[][] getMyWatorModel() {
+		return myWatorModel;
+	}
 }
