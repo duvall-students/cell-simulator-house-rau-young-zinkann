@@ -22,6 +22,7 @@ public class WatorModel {
 	private int waterDensity = 3;
 	private double sharkDensity = 1;
 	private double fishDensity = 10;
+	private boolean isShark = true;
 
 
 	private WatorObject[][] myWatorModel;	// The squares making up the maze
@@ -127,16 +128,15 @@ public class WatorModel {
 	
 	public void update() {
 		//loop through each object
+		isShark = true;
 		Random random = new Random();
 		for(int i = 0; i < myWatorModel.length; i++) {
 			for(int j = 0; j < myWatorModel[i].length; j++) {
 				//check is fish 
 				if(myWatorModel[i][j].getTag() == FISH_TAG) {
 					Fish currentFish = (Fish) myWatorModel[i][j];
-					
 					//reduce breed time for the cycle 
 					currentFish.reduceBreedTime();
-					
 					//breed behavior
 					if(currentFish.isBreeding()) {
 						
@@ -149,7 +149,6 @@ public class WatorModel {
 							//myWatorModel[breedPoint.x][breedPoint.y] = new Fish(FISH_TAG, breedPoint.x, breedPoint.y, myWatorModel);
 						}
 					}
-					
 					//swim behavior
 					//gets array of water spots 
 					ArrayList<Point> swimAreas = getValidPointArray(currentFish, WATER_TAG);
@@ -184,13 +183,12 @@ public class WatorModel {
 						//starve behavior
 						if(currentShark.isStarved()) {
 							//replaces shark with water and returns
-							currentShark.starve(j, i);
-							//myWatorModel[i][j] = new Water(WATER_TAG, i, j, myWatorModel);
-							return;
+							currentShark.starve(i, j);
+							isShark = false;
 						}
 						
 						//breed behavior
-						if(currentShark.isBreeding()) {
+						if(currentShark.isBreeding() && isShark){
 							//shark breed behavior
 							ArrayList<Point> breedAreas = getValidPointArray(currentShark, WATER_TAG);
 							if(!breedAreas.isEmpty()) {
@@ -202,18 +200,16 @@ public class WatorModel {
 							}
 							
 						}
-						
-						
-						
 						//eat behavior
+						if(isShark) {
 						ArrayList<Point> eatAreas = getValidPointArray(currentShark, FISH_TAG);
 						if(!eatAreas.isEmpty()) {
 							int randomNum = random.nextInt((eatAreas.size() -1) + 1);
 							Point eatPoint = eatAreas.get(randomNum);
 							currentShark.eat(eatPoint);
 							//myWatorModel[eatPoint.x][eatPoint.y] = new Water(WATER_TAG, eatPoint.x, eatPoint.y, myWatorModel);
+							}
 						}
-						
 					
 					}
 				
