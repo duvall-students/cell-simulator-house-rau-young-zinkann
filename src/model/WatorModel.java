@@ -1,3 +1,5 @@
+package model;
+
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -138,6 +140,9 @@ public class WatorModel {
 							int randomNum = random.nextInt((breedAreas.size() - 1) + 1);
 
 							Point breedPoint = breedAreas.get(randomNum);
+							
+							// Rectangle original_rect = myWatorModel[breedPoint.x][breedPoint.y].getRectangle();
+							// = new Fish(original_rect)
 
 							myWatorModel[breedPoint.x][breedPoint.y] = new Fish(FISH_TAG, breedPoint.x, breedPoint.y,
 									myWatorModel);
@@ -217,5 +222,9 @@ public class WatorModel {
 			}
 		}
 		return views;
+	}
+	
+	public WatorObject[][] getMyWatorModel() {
+		return myWatorModel;
 	}
 }
