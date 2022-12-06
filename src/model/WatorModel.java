@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class WatorModel {
@@ -26,6 +28,7 @@ public class WatorModel {
 
 
 	private WatorObject[][] myWatorModel;	// The squares making up the maze
+	private Color[][] updatedWatorModel;
 
 	public WatorModel(int rows, int columns){
 		//assert(rows > 0 && columns > 0); 
@@ -169,8 +172,6 @@ public class WatorModel {
 						myWatorModel[previousPoint.x][previousPoint.y] = new Water(WATER_TAG, previousPoint.x, previousPoint.y, myWatorModel);
 						*/
 					}	
-					
-					
 				
 				}
 				//check shark
@@ -228,5 +229,15 @@ public class WatorModel {
 			}
 		}
 		return views;
+	}
+	
+	public Color[][] getUpdatedWatorModel(int row, int columns){
+		updatedWatorModel = new Color[row][columns];
+		for(int i = 0; i < myWatorModel.length; i++) {
+			for(int j = 0; j < myWatorModel[i].length; j++) {
+				updatedWatorModel[i][j] = myWatorModel[i][j].getColor();
+			}
+		}
+		return updatedWatorModel;
 	}
 }

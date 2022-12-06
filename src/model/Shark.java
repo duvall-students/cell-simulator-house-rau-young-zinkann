@@ -18,6 +18,7 @@ public class Shark extends WatorCreature {
 		myRectangle.setFill(Color.YELLOW);
 		myStarveTime = 5;
 		originalStarveTime = myStarveTime;
+		super.watorObjectColor = Color.YELLOW;
 	}
 	
 	public void setStarveTime(int starveTime) {

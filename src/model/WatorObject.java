@@ -3,6 +3,8 @@ package model;
 import java.awt.Point;
 
 import javafx.scene.Node;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class WatorObject {
@@ -12,6 +14,7 @@ public class WatorObject {
 	private int myTag;
 	protected Point location;
 	protected WatorObject[][] myWatorWorld;
+	protected Color watorObjectColor;
 	
 	protected Rectangle myRectangle;
 	
@@ -47,6 +50,10 @@ public class WatorObject {
 	public void setLocation(int x, int y) {
 		myRectangle.setX(x);
 		myRectangle.setY(y);
+	}
+	
+	public Color getColor() {
+		return watorObjectColor;
 	}
 	
 }

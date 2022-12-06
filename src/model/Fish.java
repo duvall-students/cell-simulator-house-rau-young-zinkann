@@ -13,6 +13,7 @@ public class Fish extends WatorCreature{
 		super.myBreedTime = 1;
 		super.initialBreedTime = 1;
 		myRectangle.setFill(Color.GREEN);
+		super.watorObjectColor = Color.GREEN;
 	}
 	
 	public void Swim(Point swimPoint) {
