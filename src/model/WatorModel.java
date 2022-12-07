@@ -15,8 +15,8 @@ public class WatorModel {
 	public static final int SHARK_TAG = 1; //signifies a shark space
 	public static final int FISH_TAG = 2;	//signifies a fish space 
 
-	private static final double max = 1.0;
-	private static final double min = 1.0;
+	private static final int max = 10;
+	private static final int min = 1;
 
 
 
@@ -75,19 +75,38 @@ public class WatorModel {
 				myWatorModel[i][j] = populateObject(i,j);
 			}
 		}
-
+		
 	}
 
 	public WatorObject populateObject (int row, int col) {
 		//get random double through our range 
 		Random random = new Random();
-		int r = random.nextInt((10-1+ 1)) + 1;
+		int r = random.nextInt((max-min+ min)) + min;
 		if(r > waterDensity && r >sharkDensity) {
 			return new Fish(FISH_TAG,row, col, myWatorModel);
 		} else if (r < fishDensity && r > sharkDensity) {
 			return new Water(WATER_TAG, row, col, myWatorModel);
 		} else { 
 			return new Shark(SHARK_TAG, row, col, myWatorModel);
+		}
+	}
+	
+	//setters
+	public void setFishDensity(int newDensity) {
+		if(newDensity <= 10 && newDensity >= 0) {
+			fishDensity = newDensity;
+		}
+	}
+	
+	public void setSharkDensity(int newDensity) {
+		if(newDensity <= 10 && newDensity >= 0) {
+			sharkDensity = newDensity;
+		}
+	}
+	
+	public void setWaterDensity(int newDensity) {
+		if(newDensity <= 10 && newDensity >= 0) {
+			waterDensity = newDensity;
 		}
 	}
 
