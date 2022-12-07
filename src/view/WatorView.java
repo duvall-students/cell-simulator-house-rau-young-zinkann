@@ -4,17 +4,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.WatorModel;
-import model.WatorObject;
-
-import java.awt.Point;
-
 import controller.WatorController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -108,16 +101,32 @@ public class WatorView extends Application {
 		Button setNumRowsButton = new Button("Set Num Rows");
 		setNumRowsButton.setOnAction(value -> {
 			// controller
-			//numRows = Integer.parseInt(inputField.getText());
+			controller.setRows(Integer.parseInt(inputField.getText()));
+			newSimulation();
 		});
 		controls.getChildren().add(setNumRowsButton);
 
 		Button setNumColumnsButton = new Button("Set Num Columns");
 		setNumColumnsButton.setOnAction(value -> {
 			// controller
-			//numColumns = Integer.parseInt(inputField.getText());
+			controller.setColumns(Integer.parseInt(inputField.getText()));
+			newSimulation();
 		});
 		controls.getChildren().add(setNumColumnsButton);
+		
+		// breed time fish
+		Button setFishBreedTime = new Button("Set Fish Breed Time");
+		setFishBreedTime.setOnAction(value -> {
+			// controller
+		});
+		controls.getChildren().add(setFishBreedTime);
+		
+		// breed time shark
+		Button setSharkBreedTime = new Button("Set Shark Breed Time");
+		setSharkBreedTime.setOnAction(value -> {
+			// controller
+		});
+		controls.getChildren().add(setSharkBreedTime);
 
 		return controls;
 	}
@@ -142,7 +151,7 @@ public class WatorView extends Application {
 		Button newSimulationButton = new Button("New Simulation");
 		newSimulationButton.setOnAction(value -> {
 			// controller
-			newSimulaion();
+			newSimulation();
 		});
 		controls.getChildren().add(newSimulationButton);
 
@@ -192,27 +201,29 @@ public class WatorView extends Application {
 		}
 		return drawing;
 	}
-	
+
 	public void redraw() {
 		Color[][] updatedColors = controller.getUpdatedModelColor();
-		
+
 		for (int i = 0; i <= controller.getModelRows(); i++) {
 			for (int j = 0; j <= controller.getModelCols(); j++) {
 				// ignore black boundaries
 				if (!(i == 0 || j == 0 || i == controller.getModelRows() || j == controller.getModelCols())) {
 					Rectangle rect = cells[i][j];
 					rect.setFill(updatedColors[i][j]);
+				} else {
+					Rectangle rect = cells[i][j];
+					rect.setFill(Color.BLACK);
 				}
 			}
 		}
 	}
-	
-	public void newSimulaion() {
-		// code goes here
-		controller.getModel().createWatorWorld(controller.getModelRows(), controller.getModelCols());
-        redraw();
-    }
 
+	public void newSimulation() {
+//		controller.getModel().createWatorWorld(controller.getModelRows(), controller.getModelCols());
+		controller.getModel().createWatorWorld(controller.getRows(), controller.getColumns());
+		redraw();
+	}
 
 	public static void main(String[] args) {
 		launch(args);

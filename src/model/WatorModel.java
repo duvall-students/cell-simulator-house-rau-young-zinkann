@@ -14,12 +14,12 @@ public class WatorModel {
 	public static final int WATER_TAG = 0;	// Empty Space 
 	public static final int SHARK_TAG = 1; //signifies a shark space
 	public static final int FISH_TAG = 2;	//signifies a fish space 
-	
+
 	private static final double max = 1.0;
 	private static final double min = 1.0;
-	
-	
-	
+
+
+
 	private int waterDensity = 3;
 	private double sharkDensity = 1;
 	private double fishDensity = 10;
@@ -65,7 +65,7 @@ public class WatorModel {
 		assert(validPoint(square));
 		return myWatorModel[square.x][square.y];
 	}
-	
+
 	public void createWatorWorld(int rows, int cols) {
 		assert(rows > 0 && cols > 0);
 		myWatorModel = new WatorObject[rows][cols];
@@ -75,9 +75,9 @@ public class WatorModel {
 				myWatorModel[i][j] = populateObject(i,j);
 			}
 		}
-		
+
 	}
-	
+
 	public WatorObject populateObject (int row, int col) {
 		//get random double through our range 
 		Random random = new Random();
@@ -87,13 +87,13 @@ public class WatorModel {
 		} else if (r < fishDensity && r > sharkDensity) {
 			return new Water(WATER_TAG, row, col, myWatorModel);
 		} else { 
-		return new Shark(SHARK_TAG, row, col, myWatorModel);
+			return new Shark(SHARK_TAG, row, col, myWatorModel);
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	//return array of valid points either empty or food in the case of sharks
 	private ArrayList<Point> getValidPointArray(WatorObject currentObject, int targetTag) {
 		Point currentLocation = currentObject.getLocation();		
@@ -102,35 +102,35 @@ public class WatorModel {
 		//check for x -1 bounds 
 		if(currentLocation.x - 1 > 0 ) {
 			if(myWatorModel[currentLocation.x - 1][currentLocation.y].getTag() == targetTag) {
-			validPoints.add(new Point(currentLocation.x -1, currentLocation.y));
+				validPoints.add(new Point(currentLocation.x -1, currentLocation.y));
 			}
 		}
 		//check for x+1 bounds
 		if(currentLocation.x + 1 != myWatorModel.length) {
 			if(myWatorModel[currentLocation.x+ 1][currentLocation.y].getTag() == targetTag) {
-			validPoints.add(new Point(currentLocation.x + 1, currentLocation.y ));
+				validPoints.add(new Point(currentLocation.x + 1, currentLocation.y ));
 			}
 		}
 		//check for y -1 bounds
 		if(currentLocation.y - 1 > 0) {
 			if(myWatorModel[currentLocation.x][currentLocation.y - 1].getTag() == targetTag) {
 				validPoints.add(new Point(currentLocation.x, currentLocation.y -1));
-				}
-			
+			}
+
 		}
 		//check y+1
 		if(currentLocation.y + 1 != myWatorModel[0].length) {
 			if(myWatorModel[currentLocation.x][currentLocation.y + 1].getTag() == targetTag) {
 				validPoints.add(new Point(currentLocation.x, currentLocation.y + 1));
-				}
+			}
 		}
-		
+
 		//need to get y-1 and y=1
-		
+
 		return validPoints;
 	}
-	
-	
+
+
 	public void update() {
 		//loop through each object
 		isShark = true;
@@ -144,7 +144,7 @@ public class WatorModel {
 					currentFish.reduceBreedTime();
 					//breed behavior
 					if(currentFish.isBreeding()) {
-						
+
 						//breed behavior re-factor 
 						ArrayList<Point> breedAreas = getValidPointArray(currentFish, WATER_TAG);
 						if(!breedAreas.isEmpty()) {
@@ -161,67 +161,67 @@ public class WatorModel {
 						//swim logic
 						int randomNum = random.nextInt((swimAreas.size() - 1) + 1);
 						Point swimPoint = swimAreas.get(randomNum);
-						
+
 						currentFish.Swim(swimPoint);
 						//refeactor into fish swim area
 						/*
 						Point previousPoint = currentFish.getLocation();
-						
-						
+
+
 						myWatorModel[swimPoint.x][swimPoint.y] = currentFish;
 						myWatorModel[swimPoint.x][swimPoint.y].setLocation(swimPoint);
-						
+
 						myWatorModel[previousPoint.x][previousPoint.y] = new Water(WATER_TAG, previousPoint.x, previousPoint.y, myWatorModel);
-						*/
+						 */
 					}	
-				
+
 				}
 				//check shark
 				if(myWatorModel[i][j].getTag() == SHARK_TAG) {
-					
-						Shark currentShark = (Shark)myWatorModel[i][j];
-						currentShark.reduceBreedTime();
-						currentShark.reduceStarveTime();
-						
-						//starve behavior
-						if(currentShark.isStarved()) {
-							//replaces shark with water and returns
-							currentShark.starve(i, j);
-							isShark = false;
+
+					Shark currentShark = (Shark)myWatorModel[i][j];
+					currentShark.reduceBreedTime();
+					currentShark.reduceStarveTime();
+
+					//starve behavior
+					if(currentShark.isStarved()) {
+						//replaces shark with water and returns
+						currentShark.starve(i, j);
+						isShark = false;
+					}
+
+					//breed behavior
+					if(currentShark.isBreeding() && isShark){
+						//shark breed behavior
+						ArrayList<Point> breedAreas = getValidPointArray(currentShark, WATER_TAG);
+						if(!breedAreas.isEmpty()) {
+							int randomNum = random.nextInt((breedAreas.size() -1) + 1);
+							Point breedPoint = breedAreas.get(randomNum);
+							currentShark.breed(SHARK_TAG, breedPoint);
+							//myWatorModel[breedPoint.x][breedPoint.y] = new Shark(SHARK_TAG, breedPoint.x, breedPoint.y, myWatorModel);
+
 						}
-						
-						//breed behavior
-						if(currentShark.isBreeding() && isShark){
-							//shark breed behavior
-							ArrayList<Point> breedAreas = getValidPointArray(currentShark, WATER_TAG);
-							if(!breedAreas.isEmpty()) {
-								int randomNum = random.nextInt((breedAreas.size() -1) + 1);
-								Point breedPoint = breedAreas.get(randomNum);
-								currentShark.breed(SHARK_TAG, breedPoint);
-								//myWatorModel[breedPoint.x][breedPoint.y] = new Shark(SHARK_TAG, breedPoint.x, breedPoint.y, myWatorModel);
-								
-							}
-							
-						}
-						//eat behavior
-						if(isShark) {
+
+					}
+					//eat behavior
+					if(isShark) {
 						ArrayList<Point> eatAreas = getValidPointArray(currentShark, FISH_TAG);
 						if(!eatAreas.isEmpty()) {
 							int randomNum = random.nextInt((eatAreas.size() -1) + 1);
 							Point eatPoint = eatAreas.get(randomNum);
 							currentShark.eat(eatPoint);
 							//myWatorModel[eatPoint.x][eatPoint.y] = new Water(WATER_TAG, eatPoint.x, eatPoint.y, myWatorModel);
-							}
 						}
-					
 					}
-				
+
+				}
+
 			}
 		}
-		
-	
-  }
-	
+
+
+	}
+
 	public Rectangle[][] getWatorModelView(int row, int column){
 		Rectangle[][] views =  new Rectangle[row][column];
 		for(int i = 0; i < myWatorModel.length; i++) {
@@ -232,7 +232,7 @@ public class WatorModel {
 		}
 		return views;
 	}
-	
+
 	public Color[][] getUpdatedWatorModel(int row, int columns){
 		updatedWatorModel = new Color[row][columns];
 		for(int i = 0; i < myWatorModel.length; i++) {
@@ -242,7 +242,7 @@ public class WatorModel {
 		}
 		return updatedWatorModel;
 	}
-	
+
 	public WatorObject[][] getMyWatorModel() {
 		return myWatorModel;
 	}
