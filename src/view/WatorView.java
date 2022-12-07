@@ -184,7 +184,13 @@ public class WatorView extends Application {
 		pausedButton = new Button("Pause");
 		pausedButton.setOnAction(value -> {
 			// controller
-			controller.setPaused(!controller.isPaused());
+			if (!controller.isPaused()) {
+				controller.setPaused(!controller.isPaused());
+				pausedButton.setText("Resume");
+			} else {
+				controller.setPaused(!controller.isPaused());
+				pausedButton.setText("Pause");
+			}
 		});
 		controls.getChildren().add(pausedButton);
 
