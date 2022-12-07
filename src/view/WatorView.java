@@ -118,6 +118,30 @@ public class WatorView extends Application {
 			// controller
 		});
 		controls.getChildren().add(setSharkBreedTime);
+		
+		
+		Button setSharkDensity = new Button("Set Shark Density");
+		setSharkBreedTime.setOnAction(value -> {
+			// controller
+		});
+		controls.getChildren().add(setSharkDensity);
+		
+		Button setFishDensity = new Button("Set Fish Density");
+		setSharkBreedTime.setOnAction(value -> {
+			// controller
+			System.out.println("Pressed");
+			controller.setFishDensity(Integer.parseInt(inputField.getText()));
+			newSimulation();
+		});
+		controls.getChildren().add(setFishDensity);
+		
+		
+		Button setWaterDensity = new Button("Set Water Density");
+		setSharkBreedTime.setOnAction(value -> {
+			// controller
+			
+		});
+		controls.getChildren().add(setWaterDensity);
 
 		return controls;
 	}

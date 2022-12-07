@@ -39,6 +39,11 @@ public class WatorController {
 			doOneStep(elapsedTime);
 		}
 	}
+	
+	public void setFishDensity(int newDensity) {
+		model.setFishDensity(newDensity);
+		System.out.println("Fish Density: Set");
+	}
 
 	public boolean isPaused() {
 		return paused;
