@@ -58,20 +58,11 @@ public class WatorView extends Application {
 		stage.show();
 
 		// Makes the animation happen.  Will call "step" method repeatedly.
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(MILLISECOND_DELAY));
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> controller.step(MILLISECOND_DELAY));
 		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
-	}
-
-	/*
-	 * Does a step in the search only if not paused.
-	 */
-	public void step(double elapsedTime) {
-		if(!controller.isPaused()) {
-			controller.doOneStep(elapsedTime);
-		}
 	}
 
 	private Scene setupScene() {
@@ -183,7 +174,9 @@ public class WatorView extends Application {
 		Button takeStepButton = new Button("Step");
 		takeStepButton.setOnAction(value -> {
 			// controller
-			controller.doOneStep(MILLISECOND_DELAY);
+			if (controller.isPaused()) {
+				controller.doOneStep(MILLISECOND_DELAY);
+			}
 		});
 		controls.getChildren().add(takeStepButton);
 

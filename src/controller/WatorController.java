@@ -26,7 +26,7 @@ public class WatorController {
 		this.columns = columns;
 	}
 
-	public void doOneStep(double elapsedTime){
+	public void doOneStep(double elapsedTime) {
 		model.update();
 		view.redraw();
 	}
