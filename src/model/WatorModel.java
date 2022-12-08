@@ -75,7 +75,7 @@ public class WatorModel {
 				myWatorModel[i][j] = populateObject(i,j);
 			}
 		}
-		
+
 	}
 
 	public WatorObject populateObject (int row, int col) {
@@ -90,20 +90,20 @@ public class WatorModel {
 			return new Shark(SHARK_TAG, row, col, myWatorModel);
 		}
 	}
-	
+
 	//setters
 	public void setFishDensity(int newDensity) {
 		if(newDensity <= 10 && newDensity >= 0) {
 			fishDensity = newDensity;
 		}
 	}
-	
+
 	public void setSharkDensity(int newDensity) {
 		if(newDensity <= 10 && newDensity >= 0) {
 			sharkDensity = newDensity;
 		}
 	}
-	
+
 	public void setWaterDensity(int newDensity) {
 		if(newDensity <= 10 && newDensity >= 0) {
 			waterDensity = newDensity;
